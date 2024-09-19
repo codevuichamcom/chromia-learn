@@ -41,3 +41,9 @@ function test_add_book_review() {
     assert_equals(reviews[0].review, "ReviewText1");
     assert_equals(reviews[0].rating, 5);
 }
+
+function test_add_book_review_for_missing_book() {
+    rell.test.tx()
+        .op(create_book_review("N/A", "Reviewer2", "ReviewText2", 3))
+        .run_must_fail("Book with isbn N/A not found");
+}

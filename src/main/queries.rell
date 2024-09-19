@@ -7,10 +7,14 @@ query get_all_books() {
 }
 
 query get_all_reviews_for_book(isbn: text) {
+    require(book @? { .isbn == isbn }, "Book with isbn %s not found".format(isbn));
     val reviews = book_review @* { .book.isbn == isbn } (
-        .reviewer_name,
-        .review,
-        .rating
+        book_review_dto (
+            book = .book.to_struct(),
+            .reviewer_name,
+            .review,
+            .rating
+        )
     );
     return reviews;
 }

@@ -10,3 +10,10 @@ entity book_review {
     review: text;
     rating: integer;
 }
+
+struct book_review_dto {
+    book: struct<book>;
+    reviewer_name: text;
+    review: text;
+    rating: integer;
+}
