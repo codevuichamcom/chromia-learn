@@ -1,0 +1,16 @@
+query get_all_books() {
+    return book @* { } (
+        .isbn,
+        .title,
+        .author
+    );
+}
+
+query get_all_reviews_for_book(isbn: text) {
+    val reviews = book_review @* { .book.isbn == isbn } (
+        .reviewer_name,
+        .review,
+        .rating
+    );
+    return reviews;
+}

@@ -1,0 +1,13 @@
+operation create_book(isbn: text, title: text, author: text) {
+    create book ( isbn = isbn, title = title, author = author );
+}
+
+operation create_book_review(isbn: text, reviewer_name: text, review: text, rating: integer) {
+    val book = book @ { .isbn == isbn };
+    create book_review (
+        book,
+        reviewer_name,
+        review,
+        rating
+    );
+}

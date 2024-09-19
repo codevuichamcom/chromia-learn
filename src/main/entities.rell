@@ -1,0 +1,12 @@
+entity book {
+    key isbn: text;
+    title: text;
+    author: text;
+}
+
+entity book_review {
+    index book: book;
+    reviewer_name: text;
+    review: text;
+    rating: integer;
+}
