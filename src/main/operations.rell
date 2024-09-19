@@ -1,5 +1,8 @@
 operation create_book(isbn: text, title: text, author: text) {
-    create book ( isbn = isbn, title = title, author = author );
+    val adminPubkey = chain_context.args.admin_pubkey;
+    require(op_context.is_signer(adminPubkey), "Only admin can create books");
+
+    create book ( .isbn = isbn, .title = title, .author = author );
 }
 
 operation create_book_review(isbn: text, reviewer_name: text, review: text, rating: integer) {

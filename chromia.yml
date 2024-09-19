@@ -1,6 +1,9 @@
 blockchains:
   book-review:
     module: main
+    moduleArgs:
+      main:
+        admin_pubkey: 02B60AB361A5407D20A3BBE9E21CD173A3AA41D417EBFCA09AECCD67111D3F1AF8
 compile:
   rellVersion: 0.13.14
 database:
@@ -8,3 +11,6 @@ database:
 test:
   modules:
     - test
+  moduleArgs:
+    main:
+      admin_pubkey: "0359A8F2CE1BEF95F583169B7DF053AA227A93B2652B0A9C22975FEED638032610"

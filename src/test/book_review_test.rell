@@ -1,11 +1,16 @@
 @test module;
 
 import main.{ book, create_book, get_all_books, book_review, create_book_review };
+val book_keeper = rell.test.keypair(
+        priv = x"DEE3B1414196653BF7FA621B2EEFC3146093B1932BA2ABFAEED830906D81972A",
+        pub = x"0359A8F2CE1BEF95F583169B7DF053AA227A93B2652B0A9C22975FEED638032610"
+    );
 
 function test_add_book() {
     rell.test.tx()
         .op(create_book("123", "Book1", "Author1"))
         .op(create_book("124", "Book2", "Author2"))
+        .sign(book_keeper)
         .run();
 
     val all_books = book @* { };
@@ -19,10 +24,11 @@ function test_get_books() {
     rell.test.tx()
         .op(create_book("123", "Book1", "Author1"))
         .op(create_book("124", "Book2", "Author2"))
+        .sign(book_keeper)
         .run();
 
-    val books = get_all_books();
-    assert_equals(books.size(), 2);
+    val reviews = get_all_books();
+    assert_equals(reviews.size(), 2);
 }
 
 function test_add_book_review() {
@@ -30,6 +36,7 @@ function test_add_book_review() {
         .op(create_book("123", "Book1", "Author1"))
         .op(create_book_review("123", "Reviewer1", "ReviewText1", 5))
         .op(create_book_review("123", "Reviewer2", "ReviewText2", 3))
+        .sign(book_keeper)
         .run();
 
     val reviews = book_review @* { };

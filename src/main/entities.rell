@@ -17,3 +17,7 @@ struct book_review_dto {
     review: text;
     rating: integer;
 }
+
+struct module_args {
+    admin_pubkey: byte_array;
+}
