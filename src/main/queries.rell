@@ -22,10 +22,12 @@ query get_all_reviews_for_book(isbn: text) {
 
 query get_reviews_by_rating(rating: integer) {
     return book_review @* { .rating == rating } (
-        .book.to_struct(),
-        .reviewer_name,
-        .review,
-        .rating
+        book_review_dto (
+            .book.to_struct(),
+            .reviewer_name,
+            .review,
+            .rating
+        )
     );
 }
 

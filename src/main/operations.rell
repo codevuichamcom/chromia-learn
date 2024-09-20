@@ -1,13 +1,13 @@
 operation create_book(isbn: text, title: text, author: text) {
-    val adminPubkey = chain_context.args.admin_pubkey;
-    require(op_context.is_signer(adminPubkey), "Only admin can create books");
+    val admin_pubkey = chain_context.args.admin_pubkey;
+    require(op_context.is_signer(admin_pubkey), "Only admin can create books");
 
     create book ( .isbn = isbn, .title = title, .author = author );
 }
 
 operation update_book(isbn: text, title: text) {
-    val adminPubkey = chain_context.args.admin_pubkey;
-    require(op_context.is_signer(adminPubkey), "Only admin can update books");
+    val admin_pubkey = chain_context.args.admin_pubkey;
+    require(op_context.is_signer(admin_pubkey), "Only admin can update books");
 
     update book @ { .isbn == isbn } ( .title = title );
 }
