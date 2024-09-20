@@ -28,3 +28,8 @@ query get_reviews_by_rating(rating: integer) {
         .rating
     );
 }
+
+query get_transactions() {
+    val txs = transaction @* { } ( gtv.from_bytes(.tx_data) );
+    return list<tx>.from_gtv(txs.to_gtv());
+}
