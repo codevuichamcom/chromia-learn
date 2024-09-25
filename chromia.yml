@@ -1,5 +1,5 @@
 blockchains:
-  book-review:
+  book_review:
     module: main
     moduleArgs:
       main:
